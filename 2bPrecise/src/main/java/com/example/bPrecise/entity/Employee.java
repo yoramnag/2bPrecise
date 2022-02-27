@@ -1,5 +1,5 @@
 package com.example.bPrecise.entity;
 
-public class Employee {
+public class Employee extends Person{
 
 }
