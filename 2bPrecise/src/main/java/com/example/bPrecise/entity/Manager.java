@@ -32,8 +32,7 @@ public class Manager extends Person{
 
 	@Override
 	public String toString() {
-		return "Manager [getId()=" + getId() + ", getFirstName()=" + getFirstName() + ", getLastName()=" + getLastName()
-				+ "]";
+		return String.format("Manager [id=%s, firstName=%s, lastName=%s]", this.getId(), this.getFirstName(), this.getLastName());
 	}
 
 	

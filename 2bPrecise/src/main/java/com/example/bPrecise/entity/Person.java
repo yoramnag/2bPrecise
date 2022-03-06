@@ -58,7 +58,7 @@ public abstract class Person {
 
 	@Override
 	public String toString() {
-		return "Person [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+		return String.format("Person [id=%s, firstName=%s, lastName=%s]", id, firstName, lastName);
 	}
 	
 	

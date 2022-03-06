@@ -52,8 +52,7 @@ public class Employee extends Person{
 
 	@Override
 	public String toString() {
-		return "Employee [position=" + position + ", getId()=" + getId() + ", getFirstName()=" + getFirstName()
-				+ ", getLastName()=" + getLastName() + "]";
+		return String.format("Manager [id=%s, firstName=%s, lastName=%s , position=%s]", this.getId(), this.getFirstName(), this.getLastName(), position);
 	}
 	
 	
