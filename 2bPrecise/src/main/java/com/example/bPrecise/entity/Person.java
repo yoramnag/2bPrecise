@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.Size;
 
 @MappedSuperclass
 public abstract class Person {
@@ -15,9 +16,11 @@ public abstract class Person {
 	private Integer id;
 	
 	@Column(name="first_name")
+	@Size(min=2, message="first name should have atleast 2 characters")
 	private String firstName;
 	
 	@Column(name="last_name")
+	@Size(min=2, message="last name should have atleast 2 characters")
 	private String lastName;
 
 	public Person() {

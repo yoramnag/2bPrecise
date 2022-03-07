@@ -16,12 +16,12 @@ public class ManagerService {
 	@Autowired
 	private ManagerRepository managerRepository;
 	
-	// return all Managers
+	// Return all Managers
 	public List<Manager> findAll() {
 		return managerRepository.findAll();
 	}
 	
-	//return manager
+	//Return manager
 	public Optional<Manager> findById(int id) {
 		Optional<Manager> manager = managerRepository.findById(id);
 		
@@ -29,7 +29,11 @@ public class ManagerService {
 			throw new ManagerNotFoundException("id - " + id);
 		}
 		return manager;
-		
+	}
+	
+	// Save new manager 
+	public Manager save (Manager manager) {
+		return managerRepository.save(manager);
 	}
 
 }
