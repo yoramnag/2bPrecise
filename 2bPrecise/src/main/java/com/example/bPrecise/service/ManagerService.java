@@ -35,5 +35,12 @@ public class ManagerService {
 	public Manager save (Manager manager) {
 		return managerRepository.save(manager);
 	}
+	
+	// Delete manager
+	public void deleteManager(int id) {
+		managerRepository.deleteById(id);
+	}
+	
+	
 
 }

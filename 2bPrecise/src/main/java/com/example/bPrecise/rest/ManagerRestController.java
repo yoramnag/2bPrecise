@@ -10,6 +10,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -62,6 +63,13 @@ public class ManagerRestController {
 	public ResponseEntity<Object> updateManager(@Valid @RequestBody Manager manager) {
 		managerService.findById(manager.getId());
 		managerService.save(manager);
+		return ResponseEntity.ok().build();
+	}
+	
+	@DeleteMapping("/manager/{id}")
+	public ResponseEntity<Object> deleteManager(@PathVariable int id) {
+		managerService.findById(id);
+		managerService.deleteManager(id);
 		return ResponseEntity.ok().build();
 	}
 
