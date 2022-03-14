@@ -24,6 +24,7 @@ import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.ResponseEntity.BodyBuilder;
 
+import com.example.bPrecise.entity.Employee;
 import com.example.bPrecise.entity.Manager;
 import com.example.bPrecise.service.ManagerService;
 
@@ -72,5 +73,13 @@ public class ManagerRestController {
 		managerService.deleteManager(id);
 		return ResponseEntity.ok().build();
 	}
+	
+	@GetMapping("/manager/{id}/employee")
+	public List<Employee> retrieveAllEmployees(@PathVariable int id){
+		Optional<Manager> manager = managerService.findById(id);
+		return manager.get().getEmployees();
+	}
+	
+	
 
 }
