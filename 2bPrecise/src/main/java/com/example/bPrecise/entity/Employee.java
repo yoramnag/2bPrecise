@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Employee extends Person{
 	
 	@Column(name="position")
-	@Size(min=2, message="first name should have atleast 2 characters")
+	@Size(min=2, message="position should have atleast 2 characters")
 	private String position;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
