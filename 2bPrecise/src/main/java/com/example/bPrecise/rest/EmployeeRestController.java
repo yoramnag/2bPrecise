@@ -13,9 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,6 +57,20 @@ public class EmployeeRestController {
 				.toUri();
 
 		return ResponseEntity.created(location).build();
+	}
+	
+	@PutMapping("/employee")
+	public ResponseEntity<Object> updateManager(@Valid @RequestBody Employee employee) {
+		employeeService.findById(employee.getId());
+		employeeService.save(employee);
+		return ResponseEntity.ok().build();
+	}
+	
+	@DeleteMapping("/employee/{id}")
+	public ResponseEntity<Object> deleteManager(@PathVariable int id) {
+		employeeService.findById(id);
+		employeeService.deleteManager(id);
+		return ResponseEntity.ok().build();
 	}
 
 }

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.bPrecise.dao.EmployeeRepository;
 import com.example.bPrecise.entity.Employee;
-import com.example.bPrecise.entity.Manager;
 import com.example.bPrecise.exception.EmployeeNotFoundException;
 
 @Service
@@ -21,7 +20,7 @@ public class EmployeeService {
 		return EmployeeRepository.findAll();
 	}
 	
-	//Return employee
+	// Return employee
 	public Optional<Employee> findById(int id) {
 		Optional<Employee> employee = EmployeeRepository.findById(id);
 		
@@ -34,6 +33,11 @@ public class EmployeeService {
 	// Save new employee 
 	public Employee save (Employee employee) {
 		return EmployeeRepository.save(employee);
+	}
+	
+	// Delete manager
+	public void deleteManager(int id) {
+		EmployeeRepository.deleteById(id);
 	}
 
 }
