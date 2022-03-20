@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Employee extends Person{
 	
 	@Column(name="position")
+	@Size(min=2, message="first name should have atleast 2 characters")
 	private String position;
 	
 	@ManyToOne(fetch=FetchType.LAZY)
