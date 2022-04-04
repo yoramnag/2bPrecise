@@ -26,6 +26,7 @@ import org.springframework.http.ResponseEntity.BodyBuilder;
 
 import com.example.bPrecise.entity.Employee;
 import com.example.bPrecise.entity.Manager;
+import com.example.bPrecise.service.EmployeeService;
 import com.example.bPrecise.service.ManagerService;
 
 @RestController
@@ -34,6 +35,9 @@ public class ManagerRestController {
 	
 	@Autowired
 	private ManagerService managerService;
+	
+	@Autowired
+	private EmployeeService employeeService;
 	
 	// expose "/manager" and return list of managers
 	@GetMapping("/manager")
@@ -78,6 +82,18 @@ public class ManagerRestController {
 	public List<Employee> retrieveAllEmployees(@PathVariable int id){
 		Optional<Manager> manager = managerService.findById(id);
 		return manager.get().getEmployees();
+	}
+	
+	@PostMapping("/manager/{id}/employee")
+	public ResponseEntity<Object> createPost(@PathVariable int id, @RequestBody Employee employee) {
+		Optional<Manager> managerOptional = managerService.findById(id);
+		Manager manager = managerOptional.get();
+		employee.setManager(manager);
+		employeeService.save(employee);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(employee.getId())
+				.toUri();
+		return ResponseEntity.created(location).build();
+		
 	}
 	
 	
