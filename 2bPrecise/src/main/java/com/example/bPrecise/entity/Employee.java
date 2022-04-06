@@ -1,10 +1,13 @@
 package com.example.bPrecise.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,6 +23,9 @@ public class Employee extends Person{
 	@JsonIgnore
 	@JoinColumn(name="manager_id")
 	private Manager manager;
+	
+	@OneToMany(mappedBy="employee")
+	private List<Report> posts;
 
 	public Employee() {
 		super();
@@ -54,7 +60,7 @@ public class Employee extends Person{
 
 	@Override
 	public String toString() {
-		return String.format("Manager [id=%s, firstName=%s, lastName=%s , position=%s]", this.getId(), this.getFirstName(), this.getLastName(), position);
+		return String.format("Employee [id=%s, firstName=%s, lastName=%s , position=%s]", this.getId(), this.getFirstName(), this.getLastName(), position);
 	}
 	
 	
