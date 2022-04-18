@@ -26,6 +26,9 @@ public class Employee extends Person{
 	
 	@OneToMany(mappedBy="employee")
 	private List<Report> reports;
+	
+	@OneToMany(mappedBy="employee")
+	private List<Task> tasks;
 
 	public Employee() {
 		super();
@@ -64,6 +67,14 @@ public class Employee extends Person{
 
 	public void setReports(List<Report> reports) {
 		this.reports = reports;
+	}
+	
+	public List<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
 	}
 
 	@Override
