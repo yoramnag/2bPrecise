@@ -67,6 +67,14 @@ public class Report {
 		this.date = date;
 	}
 	
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("Report [id=%s, text=%s, date=%s]", this.getId(), this.getText(), this.getDate());

@@ -57,6 +57,14 @@ public class Employee extends Person{
 	public void setManager(Manager manager) {
 		this.manager = manager;
 	}
+	
+	public List<Report> getReports() {
+		return reports;
+	}
+
+	public void setReports(List<Report> reports) {
+		this.reports = reports;
+	}
 
 	@Override
 	public String toString() {

@@ -25,7 +25,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.bPrecise.entity.Employee;
 import com.example.bPrecise.entity.Manager;
+import com.example.bPrecise.entity.Report;
 import com.example.bPrecise.service.EmployeeService;
+import com.example.bPrecise.service.ReportService;
 
 @RestController
 @RequestMapping("/api")
@@ -33,6 +35,9 @@ public class EmployeeRestController {
 	
 	@Autowired
 	private EmployeeService employeeService;
+	
+	@Autowired
+	private ReportService reportService;
 	
 	// expose "/employee" and return list of employees
 	@GetMapping("/employee")
@@ -71,6 +76,25 @@ public class EmployeeRestController {
 		employeeService.findById(id);
 		employeeService.deleteManager(id);
 		return ResponseEntity.ok().build();
+	}
+	
+	@GetMapping("/employee/{id}/report")
+	public List<Report> retrieveAllReports(@PathVariable int id){
+		Optional<Employee> employee = employeeService.findById(id);
+		return employee.get().getReports();
+	}
+	
+	@PostMapping("/employee/{id}/report")
+	public ResponseEntity<Object> createReport(@PathVariable int id, @RequestBody Report report) {
+		report.setId(0);
+		Optional<Employee> employeeOptional = employeeService.findById(id);
+		Employee employee = employeeOptional.get();
+		report.setEmployee(employee);
+		reportService.save(report);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(report.getId())
+				.toUri();
+		return ResponseEntity.created(location).build();
+		
 	}
 
 }
