@@ -50,7 +50,7 @@ public class EmployeeRestController {
 	}
 	
 	@PostMapping("/employee")
-	public ResponseEntity<Object> createManager(@Valid @RequestBody Employee employee) {
+	public ResponseEntity<Object> createEmployee(@Valid @RequestBody Employee employee) {
 		employee.setId(0);
 		Employee savedEmployee = employeeService.save(employee);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedEmployee.getId())
@@ -60,14 +60,14 @@ public class EmployeeRestController {
 	}
 	
 	@PutMapping("/employee")
-	public ResponseEntity<Object> updateManager(@Valid @RequestBody Employee employee) {
+	public ResponseEntity<Object> updateEmployee(@Valid @RequestBody Employee employee) {
 		employeeService.findById(employee.getId());
 		employeeService.save(employee);
 		return ResponseEntity.ok().build();
 	}
 	
 	@DeleteMapping("/employee/{id}")
-	public ResponseEntity<Object> deleteManager(@PathVariable int id) {
+	public ResponseEntity<Object> deleteEmployee(@PathVariable int id) {
 		employeeService.findById(id);
 		employeeService.deleteManager(id);
 		return ResponseEntity.ok().build();
