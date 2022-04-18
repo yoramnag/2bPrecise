@@ -25,7 +25,7 @@ public class Employee extends Person{
 	private Manager manager;
 	
 	@OneToMany(mappedBy="employee")
-	private List<Report> posts;
+	private List<Report> reports;
 
 	public Employee() {
 		super();
