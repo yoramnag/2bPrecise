@@ -85,7 +85,7 @@ public class ManagerRestController {
 	}
 	
 	@PostMapping("/manager/{id}/employee")
-	public ResponseEntity<Object> createEmployee(@PathVariable int id, @RequestBody Employee employee) {
+	public ResponseEntity<Object> createEmployee(@PathVariable int id, @Valid @RequestBody Employee employee) {
 		employee.setId(0);
 		Optional<Manager> managerOptional = managerService.findById(id);
 		Manager manager = managerOptional.get();

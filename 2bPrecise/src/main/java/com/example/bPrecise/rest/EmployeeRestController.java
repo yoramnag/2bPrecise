@@ -85,7 +85,7 @@ public class EmployeeRestController {
 	}
 	
 	@PostMapping("/employee/{id}/report")
-	public ResponseEntity<Object> createReport(@PathVariable int id, @RequestBody Report report) {
+	public ResponseEntity<Object> createReport(@PathVariable int id, @Valid @RequestBody Report report) {
 		report.setId(0);
 		Optional<Employee> employeeOptional = employeeService.findById(id);
 		Employee employee = employeeOptional.get();
