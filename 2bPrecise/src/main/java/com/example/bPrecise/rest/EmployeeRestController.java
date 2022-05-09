@@ -46,6 +46,7 @@ public class EmployeeRestController {
 		return employeeService.findAll();
 	}
 	
+	// expose "/employee{id}" and return employee by his id 
 	@GetMapping("/employee/{id}")
 	public EntityModel<Employee> retrieveEmployee(@PathVariable int id) {
 		Optional<Employee> employee = employeeService.findById(id);
@@ -55,16 +56,18 @@ public class EmployeeRestController {
 		return resource;
 	}
 	
-	@PostMapping("/employee")
-	public ResponseEntity<Object> createEmployee(@Valid @RequestBody Employee employee) {
-		employee.setId(0);
-		Employee savedEmployee = employeeService.save(employee);
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedEmployee.getId())
-				.toUri();
-
-		return ResponseEntity.created(location).build();
-	}
+//	// expose "/employee" and save new employee
+//	@PostMapping("/employee")
+//	public ResponseEntity<Object> createEmployee(@Valid @RequestBody Employee employee) {
+//		employee.setId(0);
+//		Employee savedEmployee = employeeService.save(employee);
+//		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedEmployee.getId())
+//				.toUri();
+//
+//		return ResponseEntity.created(location).build();
+//	}
 	
+	// expose "/employee" and update employee info
 	@PutMapping("/employee")
 	public ResponseEntity<Object> updateEmployee(@Valid @RequestBody Employee employee) {
 		employeeService.findById(employee.getId());
@@ -72,6 +75,7 @@ public class EmployeeRestController {
 		return ResponseEntity.ok().build();
 	}
 	
+	// expose "/employee" and delete employee by id
 	@DeleteMapping("/employee/{id}")
 	public ResponseEntity<Object> deleteEmployee(@PathVariable int id) {
 		employeeService.findById(id);
@@ -79,12 +83,14 @@ public class EmployeeRestController {
 		return ResponseEntity.ok().build();
 	}
 	
+	// expose "/employee/{id}/report"" and return all employee reports
 	@GetMapping("/employee/{id}/report")
 	public List<Report> retrieveAllReports(@PathVariable int id){
 		Optional<Employee> employee = employeeService.findById(id);
 		return employee.get().getReports();
 	}
 	
+	// expose "/employee/{id}/report"" and add a new report for employee
 	@PostMapping("/employee/{id}/report")
 	public ResponseEntity<Object> createReport(@PathVariable int id, @Valid @RequestBody Report report) {
 		report.setId(0);
@@ -98,6 +104,7 @@ public class EmployeeRestController {
 		
 	}
 	
+	// expose "/employee/{id}/task"" and return all employee tasks
 	@GetMapping("/employee/{id}/task")
 	public List<Task> retrieveAllTasks(@PathVariable int id){
 		Optional<Employee> employee = employeeService.findById(id);
