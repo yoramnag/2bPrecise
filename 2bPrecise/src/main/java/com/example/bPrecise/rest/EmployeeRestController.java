@@ -26,6 +26,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.example.bPrecise.entity.Employee;
 import com.example.bPrecise.entity.Manager;
 import com.example.bPrecise.entity.Report;
+import com.example.bPrecise.entity.Task;
 import com.example.bPrecise.service.EmployeeService;
 import com.example.bPrecise.service.ReportService;
 
@@ -95,6 +96,12 @@ public class EmployeeRestController {
 				.toUri();
 		return ResponseEntity.created(location).build();
 		
+	}
+	
+	@GetMapping("/employee/{id}/task")
+	public List<Task> retrieveAllTasks(@PathVariable int id){
+		Optional<Employee> employee = employeeService.findById(id);
+		return employee.get().getTasks();
 	}
 
 }
