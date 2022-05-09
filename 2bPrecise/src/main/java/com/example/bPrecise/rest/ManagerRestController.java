@@ -50,6 +50,7 @@ public class ManagerRestController {
 		return managerService.findAll();
 	}
 	
+	// expose "/manager/{id}" and return manager by his id
 	@GetMapping("/manager/{id}")
 	public EntityModel<Manager> retrieveManager(@PathVariable int id) {
 		Optional<Manager> manager = managerService.findById(id);
@@ -59,6 +60,7 @@ public class ManagerRestController {
 		return resource;
 	}
 	
+	// expose "/manager" and save new manager
 	@PostMapping("/manager")
 	public ResponseEntity<Object> createManager(@Valid @RequestBody Manager manager) {
 		manager.setId(0);
@@ -69,6 +71,7 @@ public class ManagerRestController {
 		return ResponseEntity.created(location).build();
 	}
 	
+	// expose "/manager" and update manager info
 	@PutMapping("/manager")
 	public ResponseEntity<Object> updateManager(@Valid @RequestBody Manager manager) {
 		managerService.findById(manager.getId());
@@ -76,6 +79,7 @@ public class ManagerRestController {
 		return ResponseEntity.ok().build();
 	}
 	
+	// expose "/manager/{id}" and delete manager by his id
 	@DeleteMapping("/manager/{id}")
 	public ResponseEntity<Object> deleteManager(@PathVariable int id) {
 		managerService.findById(id);
@@ -83,12 +87,14 @@ public class ManagerRestController {
 		return ResponseEntity.ok().build();
 	}
 	
+	// expose "/manager/{id}/employee" and return manager employees
 	@GetMapping("/manager/{id}/employee")
 	public List<Employee> retrieveAllEmployees(@PathVariable int id){
 		Optional<Manager> manager = managerService.findById(id);
 		return manager.get().getEmployees();
 	}
 	
+	// expose "/manager/{id}/employee" and add a new employee to manager
 	@PostMapping("/manager/{id}/employee")
 	public ResponseEntity<Object> createEmployee(@PathVariable int id, @Valid @RequestBody Employee employee) {
 		employee.setId(0);
@@ -102,11 +108,11 @@ public class ManagerRestController {
 		
 	}
 	
+	// expose "/manager/{mgrId}/employee/{empId}/task" create a new task a assign it to an employee
 	@PostMapping("/manager/{mgrId}/employee/{empId}/task")
 	public ResponseEntity<Object> createNewTask(@PathVariable int mgrId, @PathVariable int empId , @Valid @RequestBody Task task) {
 		task.setId(0);
 		Optional<Manager> managerOptional = managerService.findById(mgrId);
-		Manager manager = managerOptional.get();
 		Optional<Employee> employeeOptional = employeeService.findById(empId);
 		Employee employee = employeeOptional.get();
 		task.setEmployee(employee);
