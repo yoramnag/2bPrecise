@@ -39,5 +39,15 @@ public class EmployeeService {
 	public void deleteManager(int id) {
 		EmployeeRepository.deleteById(id);
 	}
+	
+	public boolean isEmployeeExist(int id) {
+		Optional<Employee> employee = EmployeeRepository.findById(id);
+		
+		if(!employee.isPresent()) {
+			throw new EmployeeNotFoundException("id - " + id);
+		}
+		return true;
+		
+	}
 
 }

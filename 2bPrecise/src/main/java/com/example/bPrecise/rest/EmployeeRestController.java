@@ -70,16 +70,18 @@ public class EmployeeRestController {
 	// expose "/employee" and update employee info
 	@PutMapping("/employee")
 	public ResponseEntity<Object> updateEmployee(@Valid @RequestBody Employee employee) {
-		employeeService.findById(employee.getId());
-		employeeService.save(employee);
+		if(employeeService.isEmployeeExist(employee.getId())) {
+			employeeService.save(employee);
+		}
 		return ResponseEntity.ok().build();
 	}
 	
 	// expose "/employee" and delete employee by id
 	@DeleteMapping("/employee/{id}")
 	public ResponseEntity<Object> deleteEmployee(@PathVariable int id) {
-		employeeService.findById(id);
-		employeeService.deleteManager(id);
+		if(employeeService.isEmployeeExist(id)) {
+			employeeService.deleteManager(id);
+		}
 		return ResponseEntity.ok().build();
 	}
 	

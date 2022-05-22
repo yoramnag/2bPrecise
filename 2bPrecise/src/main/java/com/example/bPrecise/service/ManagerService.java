@@ -41,6 +41,16 @@ public class ManagerService {
 		managerRepository.deleteById(id);
 	}
 	
+	public boolean isManagerExist(int id) {
+		Optional<Manager> manager = managerRepository.findById(id);
+		
+		if(!manager.isPresent()) {
+			throw new ManagerNotFoundException("id - " + id);
+		}
+		return true;
+		
+	}
+	
 	
 
 }

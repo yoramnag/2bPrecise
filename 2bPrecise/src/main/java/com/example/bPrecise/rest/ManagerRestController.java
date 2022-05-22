@@ -74,16 +74,18 @@ public class ManagerRestController {
 	// expose "/manager" and update manager info
 	@PutMapping("/manager")
 	public ResponseEntity<Object> updateManager(@Valid @RequestBody Manager manager) {
-		managerService.findById(manager.getId());
-		managerService.save(manager);
+		if(managerService.isManagerExist(manager.getId())) {
+			managerService.save(manager);
+		}
 		return ResponseEntity.ok().build();
 	}
 	
 	// expose "/manager/{id}" and delete manager by his id
 	@DeleteMapping("/manager/{id}")
 	public ResponseEntity<Object> deleteManager(@PathVariable int id) {
-		managerService.findById(id);
-		managerService.deleteManager(id);
+		if(managerService.isManagerExist(id)) {
+			managerService.deleteManager(id);
+		}
 		return ResponseEntity.ok().build();
 	}
 	
@@ -112,11 +114,12 @@ public class ManagerRestController {
 	@PostMapping("/manager/{mgrId}/employee/{empId}/task")
 	public ResponseEntity<Object> createNewTask(@PathVariable int mgrId, @PathVariable int empId , @Valid @RequestBody Task task) {
 		task.setId(0);
-		Optional<Manager> managerOptional = managerService.findById(mgrId);
-		Optional<Employee> employeeOptional = employeeService.findById(empId);
-		Employee employee = employeeOptional.get();
-		task.setEmployee(employee);
-		taskService.save(task);
+		if(managerService.isManagerExist(mgrId)) {
+			Optional<Employee> employeeOptional = employeeService.findById(empId);
+			Employee employee = employeeOptional.get();
+			task.setEmployee(employee);
+			taskService.save(task);
+		}
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(task.getId())
 				.toUri();
 		return ResponseEntity.created(location).build();
