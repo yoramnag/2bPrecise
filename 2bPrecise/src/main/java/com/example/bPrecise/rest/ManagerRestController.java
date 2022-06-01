@@ -27,6 +27,7 @@ import org.springframework.http.ResponseEntity.BodyBuilder;
 import com.example.bPrecise.entity.Employee;
 import com.example.bPrecise.entity.Manager;
 import com.example.bPrecise.entity.Task;
+import com.example.bPrecise.exception.EmployeeNotFoundException;
 import com.example.bPrecise.service.EmployeeService;
 import com.example.bPrecise.service.ManagerService;
 import com.example.bPrecise.service.TaskService;
@@ -114,11 +115,15 @@ public class ManagerRestController {
 	@PostMapping("/manager/{mgrId}/employee/{empId}/task")
 	public ResponseEntity<Object> createNewTask(@PathVariable int mgrId, @PathVariable int empId , @Valid @RequestBody Task task) {
 		task.setId(0);
-		if(managerService.isManagerExist(mgrId)) {
-			Optional<Employee> employeeOptional = employeeService.findById(empId);
+		Optional<Manager> managerOptional = managerService.findById(mgrId);
+		Optional<Employee> employeeOptional = employeeService.findById(empId);
+		if(managerService.checkIfEmployeeIsUnderManager(managerOptional.get().getEmployees(), empId)) {
 			Employee employee = employeeOptional.get();
 			task.setEmployee(employee);
 			taskService.save(task);
+		}
+		else {
+			throw new EmployeeNotFoundException("id - " + empId);
 		}
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(task.getId())
 				.toUri();

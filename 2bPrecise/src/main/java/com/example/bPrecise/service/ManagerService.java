@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.bPrecise.dao.ManagerRepository;
+import com.example.bPrecise.entity.Employee;
 import com.example.bPrecise.entity.Manager;
 import com.example.bPrecise.exception.ManagerNotFoundException;
 
@@ -48,7 +49,15 @@ public class ManagerService {
 			throw new ManagerNotFoundException("id - " + id);
 		}
 		return true;
-		
+	}
+	
+	public boolean checkIfEmployeeIsUnderManager(List<Employee> empList , int empId) {
+		for (int i = 0; i < empList.size(); i++) {
+			if(empList.get(i).getId() == empId) {
+				return true;
+			}
+		}
+		return false; 
 	}
 	
 	
