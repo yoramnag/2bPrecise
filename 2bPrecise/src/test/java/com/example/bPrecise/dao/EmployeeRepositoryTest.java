@@ -14,6 +14,7 @@ import com.example.bPrecise.entity.Employee;
 @DataJpaTest
 public class EmployeeRepositoryTest {
 	
+	
 	@Autowired
 	private EmployeeRepository employeeRepository;
 	

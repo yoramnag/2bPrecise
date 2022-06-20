@@ -15,6 +15,7 @@ import com.example.bPrecise.entity.Manager;
 @DataJpaTest
 public class ManagerRepositoryTest {
 	
+	
 	@Autowired
 	private ManagerRepository managerRepository;
 	

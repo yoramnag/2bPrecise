@@ -14,6 +14,7 @@ import com.example.bPrecise.entity.Task;
 @DataJpaTest
 public class TaskRepositoryTest {
 	
+	
 	@Autowired
 	private TaskRepository taskRepository;
 	
