@@ -1,4 +1,4 @@
-package com.example.bPrecise.dao;
+package com.example.bPrecise.data;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
