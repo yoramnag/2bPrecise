@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,6 +33,15 @@ public class ManagerServiceTest {
 		List<Manager> managers = managerService.findAll();
 		
 		assertEquals("Ziv",managers.get(0).getFirstName());
+	}
+	
+	@Test
+	public void retrieveOneManager_basic() {
+		Optional<Manager> managerDemo = Optional.ofNullable(new Manager(1,"Ziv","Cohen"));
+		when(managerRepository.findById(1)).thenReturn(managerDemo);
+		
+		Optional<Manager> manager = managerService.findById(1);
+		assertEquals("Ziv",manager.get().getFirstName());
 	}
 
 }
