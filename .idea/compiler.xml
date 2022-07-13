@@ -9,6 +9,9 @@
         <module name="2bPrecise" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="2bPrecise" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
