@@ -11,3 +11,6 @@ http://localhost:8080/actuator
 
 HAL
 http://localhost:8080/explorer/index.html#uri=/![image](https://user-images.githubusercontent.com/48060702/173516959-78c6f508-e0dc-439d-b5f2-0f3e2209fc99.png)
+
+postman json 
+please import 2bPrecise.postman_collection.jsom to postman to run some requests 
