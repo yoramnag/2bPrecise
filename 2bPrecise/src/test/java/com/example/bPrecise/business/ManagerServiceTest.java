@@ -43,5 +43,16 @@ public class ManagerServiceTest {
 		Optional<Manager> manager = managerService.findById(1);
 		assertEquals("Ziv",manager.get().getFirstName());
 	}
+	
+	@Test
+	public void saveNewManager_basic() {
+		Manager managerDemo = new Manager(1,"Ziv","Cohen");
+		when(managerService.save(managerDemo)).thenReturn(managerDemo);
+		
+		Manager manager = managerService.save(managerDemo);
+		assertEquals(manager.getFirstName(),managerDemo.getFirstName());
+		
+		
+	}
 
 }
