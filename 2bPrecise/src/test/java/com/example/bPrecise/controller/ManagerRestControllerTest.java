@@ -1,9 +1,12 @@
 package com.example.bPrecise.controller;
 
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.beans.Expression;
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -15,13 +18,16 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.example.bPrecise.entity.Manager;
 import com.example.bPrecise.rest.ManagerRestController;
 import com.example.bPrecise.service.EmployeeService;
 import com.example.bPrecise.service.ManagerService;
 import com.example.bPrecise.service.TaskService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 @WebMvcTest(ManagerRestController.class)
@@ -72,6 +78,20 @@ public class ManagerRestControllerTest {
 				.andExpect(content().json("{id:1,firstName:Eyal,lastName:Zoref}"))
 				.andReturn();
 	}
+	
+//	@Test
+//	public void saveNewManager_basic() throws Exception {
+//		RequestBuilder request = MockMvcRequestBuilders.post("/api/manager")
+//				.accept(MediaType.APPLICATION_JSON)
+//				.content("{\"id\": 10003,\"firstName\": \"Ran\",\"lastName\": \"Avital\"}")
+//				.contentType(MediaType.APPLICATION_JSON);
+//		
+//		MvcResult result = mockMvc.perform(request)
+//				.andExpect(status().isCreated())
+//				.andExpect(header().string("location",containsString("/api/manager/")))
+//				.andReturn();
+//		System.out.println("jkhhn");
+//	}
 	
 	
 
